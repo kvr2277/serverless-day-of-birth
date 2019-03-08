@@ -12,7 +12,7 @@ provider:
   region: us-east-1
 
 functions:
-  candidateSubmission:
+  ageCalculator:
     handler: api/dayOfBirth.submit
     memorySize: 128
     description: Return day of birth
