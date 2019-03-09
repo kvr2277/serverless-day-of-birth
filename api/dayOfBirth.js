@@ -20,10 +20,11 @@ module.exports.submit = async (event, context, callback) => {
   callback(null, response);
 };
 
-async function fetchAge(dob) {
+async function fetchAgeNoSecuirty(dob) {
   return new Promise((resolve, reject) => {
     
-      let url = 'https://xxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/age?dob=' + dob;
+      //change your URL below
+      let url = 'https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev/age?dob=' + dob;
       fetch(url, {
               method: 'GET',
               headers: {
@@ -43,4 +44,28 @@ async function fetchAge(dob) {
               reject('fetch failed ', e);
           });
   });
+}
+
+
+async function fetchAge(dob){
+  let resp, err;
+  let Security = require('./utils/Security');
+  await to(Security.login('test@example.com', 'Passw0rd!'));
+
+   [err, resp] = await to(Security.invokeApig('https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev',
+    '/age', 
+    'GET', 
+    {Accept: 'application/json'}, 
+    {dob: dob}));
+
+  return resp;
+
+}
+
+function to(promise) {
+  return promise.then(data => {
+      console.log('data is '+JSON.stringify(data));
+      return [null, data];
+  })
+      .catch(err => [err]);
 }

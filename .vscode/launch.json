@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+     {
+      "name": "Debug",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "windows": {
+        "runtimeExecutable": "npm.cmd"
+        },
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+       "run-script",
+       "debug",
+      ],
+      "outputCapture" : "std",
+      "port": 9229
+     }
+    ]
+   }

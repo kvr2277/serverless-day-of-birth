@@ -10,9 +10,10 @@ provider:
   runtime: nodejs8.10
   stage: dev
   region: us-east-1
+  environment: ${file(env.yml):${self:provider.stage}}
 
 functions:
-  ageCalculator:
+  dayAndAgeCalculator:
     handler: api/dayOfBirth.submit
     memorySize: 128
     description: Return day of birth
